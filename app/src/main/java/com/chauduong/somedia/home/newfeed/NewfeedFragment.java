@@ -15,8 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.recyclerview.widget.ListAdapter;
 
 import com.chauduong.somedia.R;
+import com.chauduong.somedia.adapter.ListNewApdater;
 import com.chauduong.somedia.adapter.Util;
 import com.chauduong.somedia.databinding.DialogNewfeedBinding;
 import com.chauduong.somedia.databinding.FragmentNewfeedsBinding;
@@ -25,6 +28,7 @@ import com.chauduong.somedia.model.Newfeed;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
@@ -32,7 +36,7 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
     private static final String TAG = "NewfeedFragment";
     FragmentNewfeedsBinding mFragmentNewfeedsBinding;
     NewfeedPresenterImpl mNewfeedPresenter;
-
+    ListNewApdater mListNewApdater;
     public NewfeedFragment() {
     }
 
@@ -47,15 +51,19 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         registerListener();
-        initPresenter();
         initView();
+        initPresenter();
+        mFragmentNewfeedsBinding.rvListNewfeed.setAdapter(mListNewApdater);
     }
 
     private void initView() {
+        mListNewApdater = new ListNewApdater();
     }
+
 
     private void initPresenter() {
         mNewfeedPresenter = new NewfeedPresenterImpl(this);
+        mNewfeedPresenter.getNew();
     }
 
     private void registerListener() {
@@ -107,8 +115,10 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
         builder.show();
     }
 
-    @Override
-    public void updateData() {
 
+    @Override
+    public void updateData(List<Newfeed> listMutableLiveData) {
+        mListNewApdater.setNewfeedList(listMutableLiveData);
+        mListNewApdater.notifyDataSetChanged();
     }
 }

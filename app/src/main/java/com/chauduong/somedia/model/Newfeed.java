@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class Newfeed implements Serializable {
+public class Newfeed implements Serializable, Comparable {
     private String id;
     private User mUser;
     private Date mDate;
     private String mContent;
     private String linkImage;
+
+    public Newfeed() {
+    }
 
     public Newfeed(User mUser, Date mDate, String mContent, String linkImage) {
         this.id = UUID.randomUUID().toString();
@@ -56,7 +59,7 @@ public class Newfeed implements Serializable {
         this.linkImage = linkImage;
     }
 
-    static DiffUtil.ItemCallback<Newfeed> DIFF_CALLBACK = new DiffUtil.ItemCallback<Newfeed>() {
+    public static DiffUtil.ItemCallback<Newfeed> DIFF_CALLBACK = new DiffUtil.ItemCallback<Newfeed>() {
 
         @Override
         public boolean areItemsTheSame(@NonNull Newfeed oldItem, @NonNull Newfeed newItem) {
@@ -70,4 +73,13 @@ public class Newfeed implements Serializable {
             return oldItem.equals(newItem);
         }
     };
+
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof Newfeed) {
+            Newfeed newfeed = (Newfeed) o;
+            return this.getmDate().compareTo(((Newfeed) o).getmDate());
+        }
+        return 0;
+    }
 }

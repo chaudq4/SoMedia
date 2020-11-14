@@ -1,5 +1,7 @@
 package com.chauduong.somedia.home.newfeed;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -11,11 +13,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class NewfeedPresenterImpl implements NewfeedPresenter {
+    private static final String TAG = "NewfeedPresenterImpl";
     private NewfeedView mNewfeedView;
-
+    List<Newfeed> listMutableLiveData;
     public NewfeedPresenterImpl(NewfeedView mNewfeedView) {
         this.mNewfeedView = mNewfeedView;
     }
@@ -24,14 +30,21 @@ public class NewfeedPresenterImpl implements NewfeedPresenter {
     public void getNew() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("newfeed");
+        listMutableLiveData=new ArrayList<>();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                MutableLiveData<List<Newfeed>> listMutableLiveData;
+                List<Newfeed> newfeeds = new ArrayList<>();
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     Newfeed newfeed= data.getValue(Newfeed.class);
-                    listMutableLiveData.s
+                    newfeeds.add(newfeed);
                 }
+
+                Log.d(TAG, "onDataChange: "+ newfeeds.toString());
+                listMutableLiveData= newfeeds;
+                Collections.sort(listMutableLiveData);
+                Collections.reverse(listMutableLiveData);
+                mNewfeedView.updateData(listMutableLiveData);
             }
 
             @Override

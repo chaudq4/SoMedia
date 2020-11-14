@@ -1,5 +1,6 @@
 package com.chauduong.somedia.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,19 +21,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ListNewApdater extends ListAdapter<Newfeed, ListNewApdater.NewHolder> {
-    MutableLiveData<List<Newfeed>> newfeedList;
+public class ListNewApdater extends RecyclerView.Adapter<ListNewApdater.NewHolder> {
+    private static final String TAG = "ListNewApdater" ;
+    List<Newfeed> newfeedList;
     ItemClickListener mItemClickListener;
     LayoutInflater mLayoutInflater;
 
-    protected ListNewApdater(@NonNull DiffUtil.ItemCallback diffCallback) {
-        super(diffCallback);
+
+    public ListNewApdater() {
     }
 
-    public void setNewfeedList(MutableLiveData<List<Newfeed>> newfeedList) {
+    public void setNewfeedList(List<Newfeed> newfeedList) {
         this.newfeedList = newfeedList;
-    }
 
+    }
 
     @NonNull
     @Override
@@ -48,16 +50,23 @@ public class ListNewApdater extends ListAdapter<Newfeed, ListNewApdater.NewHolde
     @Override
     public void onBindViewHolder(@NonNull NewHolder holder, int position) {
         DateFormat dateFormatter = new SimpleDateFormat("kk:mm dd-MM-yyyy");
-        final Newfeed newfeed = newfeedList.getValue().get(position);
+        final Newfeed newfeed = newfeedList.get(position);
+        Log.d(TAG, "onBindViewHolder: "+newfeed.toString());
         holder.itemNewBinding.tvContent.setText(newfeed.getmContent());
         holder.itemNewBinding.tvUserName.setText(newfeed.getmUser().getFullName());
         holder.itemNewBinding.tvDate.setText(dateFormatter.format(newfeed.getmDate()));
         holder.itemNewBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mItemClickListener.onItemClick(newfeed);
+//                mItemClickListener.onItemClick(newfeed);
             }
         });
+    }
+
+    @Override
+    public int getItemCount() {
+        if(newfeedList==null) return 0;
+        return newfeedList.size();
     }
 
     public void setmItemClickListener(ItemClickListener mItemClickListener) {
@@ -71,10 +80,10 @@ public class ListNewApdater extends ListAdapter<Newfeed, ListNewApdater.NewHolde
             super(itemNewBinding.getRoot());
             this.itemNewBinding = itemNewBinding;
         }
-
     }
 
     public interface ItemClickListener {
         void onItemClick(Newfeed newfeed);
     }
+
 }

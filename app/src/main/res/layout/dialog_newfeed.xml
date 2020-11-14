@@ -1,0 +1,47 @@
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtContent"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:padding="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnOK"
+                android:textColor="#FAFAFA"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/rouness_button_pink"
+                android:text="OK" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:textColor="#FAFAFA"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/rouness_button_pink"
+                android:text="Cancle" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,23 @@
+<layout>
+
+    <data></data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="15">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tbTitile"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vpContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="14" />
+    </LinearLayout>
+</layout>

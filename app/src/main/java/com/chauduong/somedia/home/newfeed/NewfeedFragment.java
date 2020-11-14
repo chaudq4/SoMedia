@@ -3,6 +3,7 @@ package com.chauduong.somedia.home.newfeed;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-public class NewfeedFragment extends Fragment implements View.OnClickListener, NewfeedView {
+public class NewfeedFragment extends Fragment implements View.OnClickListener, NewfeedView, ListNewApdater.ItemClickListener {
     private static final String TAG = "NewfeedFragment";
     FragmentNewfeedsBinding mFragmentNewfeedsBinding;
     NewfeedPresenterImpl mNewfeedPresenter;
@@ -54,6 +55,7 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
         initView();
         initPresenter();
         mFragmentNewfeedsBinding.rvListNewfeed.setAdapter(mListNewApdater);
+        mListNewApdater.setmItemClickListener(this);
     }
 
     private void initView() {
@@ -118,7 +120,22 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
 
     @Override
     public void updateData(List<Newfeed> listMutableLiveData) {
-        mListNewApdater.setNewfeedList(listMutableLiveData);
-        mListNewApdater.notifyDataSetChanged();
+        mListNewApdater.submitList(listMutableLiveData);
+        CountDownTimer countDownTimer = new CountDownTimer(500,500) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                mFragmentNewfeedsBinding.rvListNewfeed.scrollToPosition(0);
+            }
+        }.start();
+    }
+
+    @Override
+    public void onItemClick(Newfeed newfeed) {
+
     }
 }

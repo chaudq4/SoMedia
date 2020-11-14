@@ -58,21 +58,21 @@ public class Newfeed implements Serializable, Comparable {
     public void setLinkImage(String linkImage) {
         this.linkImage = linkImage;
     }
-
-    public static DiffUtil.ItemCallback<Newfeed> DIFF_CALLBACK = new DiffUtil.ItemCallback<Newfeed>() {
-
-        @Override
-        public boolean areItemsTheSame(@NonNull Newfeed oldItem, @NonNull Newfeed newItem) {
-            if (oldItem.id.equals(newItem.id)) return true;
-            return false;
-        }
-
-        @SuppressLint("DiffUtilEquals")
-        @Override
-        public boolean areContentsTheSame(@NonNull Newfeed oldItem, @NonNull Newfeed newItem) {
-            return oldItem.equals(newItem);
-        }
-    };
+//
+//    public static DiffUtil.ItemCallback<Newfeed> DIFF_CALLBACK = new DiffUtil.ItemCallback<Newfeed>() {
+//
+//        @Override
+//        public boolean areItemsTheSame(@NonNull Newfeed oldItem, @NonNull Newfeed newItem) {
+//            if (oldItem.id.equals(newItem.id)) return true;
+//            return false;
+//        }
+//
+//        @SuppressLint("DiffUtilEquals")
+//        @Override
+//        public boolean areContentsTheSame(@NonNull Newfeed oldItem, @NonNull Newfeed newItem) {
+//            return oldItem.equals(newItem);
+//        }
+//    };
 
     @Override
     public int compareTo(Object o) {

@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import com.chauduong.somedia.adapter.Util;
 import com.chauduong.somedia.keycode.Constant;
 import com.chauduong.somedia.model.User;
+import com.chauduong.somedia.session.SessionManager;
 import com.chauduong.somedia.ui.home.HomeFragment;
 import com.chauduong.somedia.ui.message.MessFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new MessFragment();
                 loadFragment(fragment);
                 return true;
+            case R.id.navigation_setting:
+                SessionManager.getInstance(this).setIsLogin(false);
+                finish();
+                break;
         }
         return false;
     }

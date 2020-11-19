@@ -3,10 +3,12 @@ package com.chauduong.somedia.home.newfeed;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.chauduong.somedia.model.Newfeed;
 import com.chauduong.somedia.model.User;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,20 +33,28 @@ public class NewfeedPresenterImpl implements NewfeedPresenter {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("newfeed");
         listMutableLiveData=new ArrayList<>();
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Newfeed> newfeeds = new ArrayList<>();
-                for(DataSnapshot data: dataSnapshot.getChildren()){
-                    Newfeed newfeed= data.getValue(Newfeed.class);
-                    newfeeds.add(newfeed);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Newfeed newfeed= dataSnapshot.getValue(Newfeed.class);
+                if(newfeed!=null){
+                    mNewfeedView.updateData(newfeed);
                 }
+            }
 
-                Log.d(TAG, "onDataChange: "+ newfeeds.toString());
-                listMutableLiveData= newfeeds;
-                Collections.sort(listMutableLiveData);
-                Collections.reverse(listMutableLiveData);
-                mNewfeedView.updateData(listMutableLiveData);
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -52,6 +62,7 @@ public class NewfeedPresenterImpl implements NewfeedPresenter {
 
             }
         });
+
     }
 
     @Override

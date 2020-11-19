@@ -3,41 +3,36 @@ package com.chauduong.somedia.home.newfeed;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.ListAdapter;
 
 import com.chauduong.somedia.R;
-import com.chauduong.somedia.adapter.ListNewApdater;
 import com.chauduong.somedia.adapter.Util;
-import com.chauduong.somedia.databinding.DialogNewfeedBinding;
 import com.chauduong.somedia.databinding.FragmentNewfeedsBinding;
 import com.chauduong.somedia.model.Newfeed;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-public class NewfeedFragment extends Fragment implements View.OnClickListener, NewfeedView, ListNewApdater.ItemClickListener {
+public class NewfeedFragment extends Fragment implements View.OnClickListener, NewfeedView, NewfeedApdater.ItemClickListener {
     private static final String TAG = "NewfeedFragment";
     FragmentNewfeedsBinding mFragmentNewfeedsBinding;
     NewfeedPresenterImpl mNewfeedPresenter;
-    ListNewApdater mListNewApdater;
+    NewfeedApdater mListNewApdater;
+    List<Newfeed> newfeeds;
     public NewfeedFragment() {
     }
 
@@ -52,15 +47,13 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         registerListener();
-        initView();
+        newfeeds= new ArrayList<>();
+        mListNewApdater = new NewfeedApdater(newfeeds);
         initPresenter();
         mFragmentNewfeedsBinding.rvListNewfeed.setAdapter(mListNewApdater);
         mListNewApdater.setmItemClickListener(this);
     }
 
-    private void initView() {
-        mListNewApdater = new ListNewApdater();
-    }
 
 
     private void initPresenter() {
@@ -119,19 +112,10 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
 
 
     @Override
-    public void updateData(List<Newfeed> listMutableLiveData) {
-        mListNewApdater.submitList(listMutableLiveData);
-        CountDownTimer countDownTimer = new CountDownTimer(500,500) {
-            @Override
-            public void onTick(long l) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                mFragmentNewfeedsBinding.rvListNewfeed.scrollToPosition(0);
-            }
-        }.start();
+    public void updateData(Newfeed newfeed) {
+        newfeeds.add(0,newfeed);
+        mListNewApdater.notifyItemInserted(0);
+        mFragmentNewfeedsBinding.rvListNewfeed.scrollToPosition(0);
     }
 
     @Override

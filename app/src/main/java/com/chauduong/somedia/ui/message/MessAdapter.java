@@ -1,6 +1,7 @@
 package com.chauduong.somedia.ui.message;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class MessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class MessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+    MessClickListener mMessClickListener;
     List<Mess> messList;
 
     public MessAdapter(List<Mess> messList) {
@@ -45,18 +46,47 @@ public class MessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        DateFormat dateFormatter = new SimpleDateFormat("kk:mm dd-MM-yyyy");
-        Mess mess = messList.get(position);
+        final DateFormat dateFormatter = new SimpleDateFormat("kk:mm dd-MM-yyyy");
+        final Mess mess = messList.get(position);
         if (holder instanceof MessViewHolderClient) {
-            MessViewHolderClient messViewHolderClient = (MessViewHolderClient) holder;
+            final MessViewHolderClient messViewHolderClient = (MessViewHolderClient) holder;
             messViewHolderClient.mItemMessClientBinding.tvFullName.setText(mess.getmUser().getFullName());
             messViewHolderClient.mItemMessClientBinding.tvContent.setText(mess.getmContent());
             messViewHolderClient.mItemMessClientBinding.tvDate.setText(dateFormatter.format(mess.getmDate()));
+//            messViewHolderClient.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    int isVisible = messViewHolderClient.mItemMessClientBinding.tvDate.getVisibility();
+//                    if (isVisible == 0) {
+//                        messViewHolderClient.mItemMessClientBinding.tvDate.setText("");
+//                        messViewHolderClient.mItemMessClientBinding.tvDate.setVisibility(View.INVISIBLE);
+//                    }
+//                    if (isVisible == 4) {
+//
+//                        messViewHolderClient.mItemMessClientBinding.tvDate.setVisibility(View.VISIBLE);
+//                    }
+//
+//                }
+//            });
         }
         if (holder instanceof MessViewHolderUser) {
-            MessViewHolderUser messViewHolderUser = (MessViewHolderUser) holder;
+            final MessViewHolderUser messViewHolderUser = (MessViewHolderUser) holder;
             messViewHolderUser.itemMessUserBinding.tvContent.setText(mess.getmContent());
             messViewHolderUser.itemMessUserBinding.tvDate.setText(dateFormatter.format(mess.getmDate()));
+//            messViewHolderUser.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    int isVisible = messViewHolderUser.itemMessUserBinding.tvDate.getVisibility();
+//                    if (isVisible == 0) {
+//                        messViewHolderUser.itemMessUserBinding.tvDate.setText("");
+//                        messViewHolderUser.itemMessUserBinding.tvDate.setVisibility(View.INVISIBLE);
+//                    }
+//                    if (isVisible == 4) {
+//
+//                        messViewHolderUser.itemMessUserBinding.tvDate.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//            });
         }
 
     }
@@ -64,6 +94,11 @@ public class MessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemCount() {
         return messList.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     class MessViewHolderClient extends RecyclerView.ViewHolder {
@@ -85,4 +120,10 @@ public class MessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
     }
+
+    public interface MessClickListener {
+        void onMessClick(Mess mess);
+    }
+
+
 }

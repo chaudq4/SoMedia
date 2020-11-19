@@ -1,4 +1,4 @@
-package com.chauduong.somedia.adapter;
+package com.chauduong.somedia.home.newfeed;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,10 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.AsyncDifferConfig;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauduong.somedia.R;
@@ -19,16 +15,17 @@ import com.chauduong.somedia.model.Newfeed;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
-public class ListNewApdater extends ListAdapter<Newfeed,ListNewApdater.NewHolder> {
-    private static final String TAG = "ListNewApdater" ;
+public class NewfeedApdater extends RecyclerView.Adapter<NewfeedApdater.NewHolder> {
+    private static final String TAG = "NewfeedApdater" ;
     ItemClickListener mItemClickListener;
     LayoutInflater mLayoutInflater;
+    List<Newfeed> newfeeds;
 
-    public ListNewApdater() {
-        super(DIFF_CALLBACK);
+    public NewfeedApdater(List<Newfeed> newfeeds) {
+        this.newfeeds = newfeeds;
     }
-
 
     @NonNull
     @Override
@@ -44,7 +41,7 @@ public class ListNewApdater extends ListAdapter<Newfeed,ListNewApdater.NewHolder
     @Override
     public void onBindViewHolder(@NonNull NewHolder holder, final int position) {
         DateFormat dateFormatter = new SimpleDateFormat("kk:mm dd-MM-yyyy");
-        final Newfeed newfeed = getItem(position);
+        final Newfeed newfeed = newfeeds.get(position);
         Log.d(TAG, "onBindViewHolder: "+newfeed.toString());
         holder.itemNewBinding.tvContent.setText(newfeed.getmContent());
         holder.itemNewBinding.tvUserName.setText(newfeed.getmUser().getFullName());
@@ -52,10 +49,16 @@ public class ListNewApdater extends ListAdapter<Newfeed,ListNewApdater.NewHolder
         holder.itemNewBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mItemClickListener.onItemClick(getItem(position));
+                mItemClickListener.onItemClick(newfeed);
             }
         });
     }
+
+    @Override
+    public int getItemCount() {
+        return newfeeds.size();
+    }
+
 
     public class NewHolder extends RecyclerView.ViewHolder {
         ItemNewBinding itemNewBinding;
@@ -73,16 +76,6 @@ public class ListNewApdater extends ListAdapter<Newfeed,ListNewApdater.NewHolder
     public interface ItemClickListener {
         void onItemClick(Newfeed newfeed);
     }
-    private static final DiffUtil.ItemCallback<Newfeed> DIFF_CALLBACK = new DiffUtil.ItemCallback<Newfeed>() {
-        @Override
-        public boolean areItemsTheSame(@NonNull Newfeed oldItem, @NonNull Newfeed newItem) {
-            return oldItem.getmContent().equals(newItem.getmContent());
-        }
 
-        @Override
-        public boolean areContentsTheSame(@NonNull Newfeed oldItem, @NonNull Newfeed newItem) {
-            return oldItem.getmContent().equals(newItem.getmContent());
-        }
-    };
 
 }

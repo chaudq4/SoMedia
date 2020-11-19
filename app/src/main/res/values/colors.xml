@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#F06292</color>
     <color name="colorPrimaryDark">#000000</color>
+    <color name="color_text_fullname_mess">#424141</color>
     <color name="colorAccent">#F06292</color>
     <color name="background_login">#000000</color>
     <color name="text_color_second">#A6E6E3E6</color>

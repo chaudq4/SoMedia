@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginPresenterImp implements LoginPresenter {
     private static final String TAG = "LoginPresenterImp";
     private LoginView mLoginView;
-    private SessionManager mSessionManager;
+
 
     public LoginPresenterImp(LoginView mLoginView) {
         this.mLoginView = mLoginView;
@@ -25,17 +25,14 @@ public class LoginPresenterImp implements LoginPresenter {
 
     @Override
     public void getPref(Context context) {
-        if (mSessionManager == null)
-            mSessionManager = new SessionManager(context);
-        mLoginView.getPref(mSessionManager.isLogin(), mSessionManager.getUserName(), mSessionManager.getPassWord());
+
+        mLoginView.getPref(SessionManager.getInstance(context).isLogin(), SessionManager.getInstance(context).isRemember(), SessionManager.getInstance(context).getUserName(), SessionManager.getInstance(context).getPassWord());
 
     }
 
     @Override
-    public void setPref(boolean isLogin, String userName, String passWord,Context context) {
-        if (mSessionManager == null)
-            mSessionManager = new SessionManager(context);
-        mSessionManager.setLogin(isLogin,userName,passWord);
+    public void setPref(boolean isLogin, boolean isRemember, String userName, String passWord, Context context) {
+        SessionManager.getInstance(context).setLogin(isLogin, isRemember, userName, passWord);
     }
 
 

@@ -6,5 +6,5 @@ public interface LoginView {
     void signInSuccess(User user);
     void signInError(String message);
     void registerSuccess();
-    void getPref(boolean isLogin, String userName, String passWord);
+    void getPref(boolean isLogin, boolean isRemember, String userName, String passWord);
 }

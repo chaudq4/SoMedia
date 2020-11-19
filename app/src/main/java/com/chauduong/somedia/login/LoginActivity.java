@@ -49,7 +49,8 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     public void signInSuccess(User user) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(Constant.KEY_USER_LOGIN, user);
-        mLoginPresenterImp.setPref(true, user.getUserName(), user.getPassWord(), getApplicationContext());
+        boolean isRemember = mActivityLoginBinding.cbRemember.isChecked();
+        mLoginPresenterImp.setPref(true, isRemember, user.getUserName(), user.getPassWord(), getApplicationContext());
         startActivity(intent);
         finish();
     }
@@ -65,9 +66,14 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     }
 
     @Override
-    public void getPref(boolean isLogin, String userName, String passWord) {
+    public void getPref(boolean isLogin, boolean isRemember, String userName, String passWord) {
         if (isLogin) {
             mLoginPresenterImp.login(userName, passWord);
+        }
+        else if(isRemember){
+            mActivityLoginBinding.cbRemember.setChecked(isRemember);
+            mActivityLoginBinding.edtUsername.setText(userName);
+            mActivityLoginBinding.edtPassword.setText(passWord);
         }
     }
 

@@ -1,30 +1,36 @@
 package com.chauduong.somedia.model;
 
-import android.annotation.SuppressLint;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class Newfeed implements Serializable, Comparable {
+public class Mess implements Serializable {
     private String id;
     private User mUser;
     private Date mDate;
     private String mContent;
     private String linkImage;
 
-    public Newfeed() {
+    public Mess() {
     }
 
-    public Newfeed(User mUser, Date mDate, String mContent, String linkImage) {
-        this.id = UUID.randomUUID().toString();
-        this.mUser = mUser;
-        this.mDate = mDate;
-        this.mContent = mContent;
-        this.linkImage = linkImage;
+    @Override
+    public String toString() {
+        return "Mess{" +
+                "id='" + id + '\'' +
+                ", mUser=" + mUser +
+                ", mDate=" + mDate +
+                ", mContent='" + mContent + '\'' +
+                ", linkImage='" + linkImage + '\'' +
+                '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public User getmUser() {
@@ -59,12 +65,11 @@ public class Newfeed implements Serializable, Comparable {
         this.linkImage = linkImage;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        if (o instanceof Newfeed) {
-            Newfeed newfeed = (Newfeed) o;
-            return this.getmDate().compareTo(((Newfeed) o).getmDate());
-        }
-        return 0;
+    public Mess(User mUser, Date mDate, String mContent, String linkImage) {
+        this.id = UUID.randomUUID().toString();
+        this.mUser = mUser;
+        this.mDate = mDate;
+        this.mContent = mContent;
+        this.linkImage = linkImage;
     }
 }

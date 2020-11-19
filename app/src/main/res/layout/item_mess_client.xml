@@ -1,0 +1,51 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duong Quang Chau"
+            android:textColor="@color/color_text_fullname_mess"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvFullName"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/round_content_mess"
+            android:gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="Hiep an com chwa fasnfmklmfgl;msa'gmsgml'kasmglmsdl'"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/imgImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvContent"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="100dp"
+            android:textSize="10sp" />
+
+
+    </RelativeLayout>
+</layout>

@@ -70,4 +70,13 @@ public class LoginPresenterImp implements LoginPresenter {
             }
         });
     }
+
+    @Override
+    public void register(User user) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user");
+        myRef.push().setValue(user);
+        mLoginView.registerSuccess();
+    }
+
 }

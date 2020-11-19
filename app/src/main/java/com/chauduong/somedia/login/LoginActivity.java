@@ -28,6 +28,9 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
         initPresenter();
         registerListener();
         mLoginPresenterImp.getPref(getApplicationContext());
+//        mLoginPresenterImp.register(new User("chaudq4","123",null,"Dương Quang Châu"));
+//        mLoginPresenterImp.register(new User("an","123",null,"Nguyễn Văn A"));
+//        mLoginPresenterImp.register(new User("thai","123",null,"Bui Thái"));
     }
 
 
@@ -54,6 +57,11 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     @Override
     public void signInError(String message) {
         Toasty.warning(this, message).show();
+    }
+
+    @Override
+    public void registerSuccess() {
+
     }
 
     @Override

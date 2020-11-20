@@ -7,12 +7,15 @@ import com.chauduong.somedia.adapter.Util;
 import com.chauduong.somedia.keycode.Constant;
 import com.chauduong.somedia.model.User;
 import com.chauduong.somedia.session.SessionManager;
+import com.chauduong.somedia.ui.examination.ExaminationFragment;
 import com.chauduong.somedia.ui.home.HomeFragment;
 import com.chauduong.somedia.ui.message.MessFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 
@@ -23,9 +26,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         setContentView(R.layout.activity_bottom);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(this);
+        CoordinatorLayout.LayoutParams layoutParam = (CoordinatorLayout.LayoutParams) navView.getLayoutParams();
+        layoutParam.setBehavior(new BottomNavigationBehavior());
         loadFragment(new HomeFragment());
         initData();
     }
@@ -45,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
             case R.id.navigation_message:
                 fragment = new MessFragment();
+                loadFragment(fragment);
+                return true;
+            case R.id.navigation_examination:
+                fragment = new ExaminationFragment();
                 loadFragment(fragment);
                 return true;
             case R.id.navigation_setting:

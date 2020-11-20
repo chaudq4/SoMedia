@@ -1,0 +1,105 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+
+            android:id="@+id/tvTime"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:gravity="end|center"
+            android:text="10:15:00"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="Câu hỏi số 1:"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="2.5"
+            android:text="Khẩu độ là gì?"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/rb_group"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5">
+
+            <RadioButton
+                android:id="@+id/rb_A"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:checked="true"
+                android:paddingStart="10dp"
+                android:text="tất cả phương án trên"
+                android:textColor="@color/color_text_fullname_mess"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <RadioButton
+                android:id="@+id/rb_B"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="tất cả phương án trên"
+                android:textColor="@color/color_text_fullname_mess"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <RadioButton
+                android:id="@+id/rb_C"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="tất cả phương án trên"
+                android:textColor="@color/color_text_fullname_mess"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <RadioButton
+                android:id="@+id/rb_D"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="tất cả phương án trên"
+                android:textColor="@color/color_text_fullname_mess"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+        </RadioGroup>
+
+        <Button
+            android:background="@drawable/rouness_button_submit_pink"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:textColor="#FAFAFA"
+            android:text="Tiếp" />
+
+
+    </LinearLayout>
+</layout>

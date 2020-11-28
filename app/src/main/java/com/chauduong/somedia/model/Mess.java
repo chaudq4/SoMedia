@@ -10,6 +10,7 @@ public class Mess implements Serializable {
     private Date mDate;
     private String mContent;
     private String linkImage;
+    private boolean isExpanded;
 
     public Mess() {
     }
@@ -71,5 +72,14 @@ public class Mess implements Serializable {
         this.mDate = mDate;
         this.mContent = mContent;
         this.linkImage = linkImage;
+        isExpanded = false;
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 }

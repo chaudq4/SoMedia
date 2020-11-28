@@ -8,6 +8,7 @@ public class User implements Serializable {
     private String passWord;
     private String linkAvt;
     private String fullName;
+    private String phone;
 
     public User(String id, String userName, String passWord) {
         this.id = id;
@@ -56,5 +57,14 @@ public class User implements Serializable {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public User(String userName, String passWord, String linkAvt, String fullName, String phone) {
+
+        this.userName = userName;
+        this.passWord = passWord;
+        this.linkAvt = linkAvt;
+        this.fullName = fullName;
+        this.phone = phone;
     }
 }

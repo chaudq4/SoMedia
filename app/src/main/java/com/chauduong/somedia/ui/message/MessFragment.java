@@ -58,13 +58,14 @@ public class MessFragment extends Fragment implements MessView, View.OnClickList
 
     private void initView() {
         messList = new ArrayList<>();
-        mMessAdapter = new MessAdapter(messList);
+        mMessAdapter = new MessAdapter(getContext(), messList);
         mFragmentRoomchatBinding.rvListMess.setAdapter(mMessAdapter);
+        mFragmentRoomchatBinding.rvListMess.setHasFixedSize(true);
     }
 
     @Override
     public void update(Mess mess) {
-        Log.d(TAG, "update: "+mess.toString());
+        Log.d(TAG, "update: " + mess.toString());
         messList.add(mess);
         mMessAdapter.notifyItemInserted(messList.size() - 1);
         mFragmentRoomchatBinding.rvListMess.scrollToPosition(messList.size() - 1);

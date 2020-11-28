@@ -14,6 +14,7 @@ import com.chauduong.somedia.databinding.ActivityLoginBinding;
 import com.chauduong.somedia.keycode.Constant;
 import com.chauduong.somedia.model.User;
 import com.chauduong.somedia.MainActivity;
+import com.chauduong.somedia.signup.SignUpActivity;
 
 import es.dmoral.toasty.Toasty;
 
@@ -30,15 +31,13 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
         initPresenter();
         registerListener();
         mLoginPresenterImp.getPref(getApplicationContext());
-//        mLoginPresenterImp.register(new User("thieucong","123456789",null,"Thiều Khắc Công"));
-//        mLoginPresenterImp.register(new User("an","123",null,"Nguyễn Văn A"));
-//        mLoginPresenterImp.register(new User("thai","123",null,"Bui Thái"));
     }
 
 
     private void registerListener() {
         if (mActivityLoginBinding != null) {
             mActivityLoginBinding.btnSignUp.setOnClickListener(this);
+            mActivityLoginBinding.tvSignUp.setOnClickListener(this);
         }
     }
 
@@ -62,17 +61,12 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
         Toasty.warning(this, message).show();
     }
 
-    @Override
-    public void registerSuccess() {
-
-    }
 
     @Override
     public void getPref(boolean isLogin, boolean isRemember, String userName, String passWord) {
         if (isLogin) {
             mLoginPresenterImp.login(userName, passWord);
-        }
-        else if(isRemember){
+        } else if (isRemember) {
             mActivityLoginBinding.cbRemember.setChecked(isRemember);
             mActivityLoginBinding.edtUsername.setText(userName);
             mActivityLoginBinding.edtPassword.setText(passWord);
@@ -87,8 +81,23 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
                 String passWord = mActivityLoginBinding.edtPassword.getText().toString();
                 mLoginPresenterImp.login(userName, passWord);
                 break;
+            case R.id.tvSignUp:
+                Intent intent = new Intent(this, SignUpActivity.class);
+                startActivityForResult(intent, Constant.REQUEST_CODE_USER);
+                break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constant.REQUEST_CODE_USER) {
+            if (resultCode == Activity.RESULT_OK) {
+                User user = (User) data.getSerializableExtra(Constant.KEY_USER_RESULT_SIGNUP);
+                mActivityLoginBinding.edtUsername.setText(user.getUserName());
+                mActivityLoginBinding.edtPassword.setText(user.getPassWord());
+            }
         }
     }
 }

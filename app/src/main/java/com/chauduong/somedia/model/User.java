@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String linkAvt;
     private String fullName;
     private String phone;
+    private boolean isOnline;
 
     public User(String id, String userName, String passWord) {
         this.id = id;
@@ -66,5 +67,13 @@ public class User implements Serializable {
         this.linkAvt = linkAvt;
         this.fullName = fullName;
         this.phone = phone;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
     }
 }

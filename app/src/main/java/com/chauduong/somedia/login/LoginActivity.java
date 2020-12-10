@@ -1,10 +1,12 @@
 package com.chauduong.somedia.login;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -37,7 +39,7 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
 
     private void registerListener() {
         if (mActivityLoginBinding != null) {
-            mActivityLoginBinding.btnSignUp.setOnClickListener(this);
+            mActivityLoginBinding.btnSignIn.setOnClickListener(this);
             mActivityLoginBinding.tvSignUp.setOnClickListener(this);
         }
     }
@@ -82,7 +84,7 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnSignUp:
+            case R.id.btnSignIn:
                 String userName = mActivityLoginBinding.edtUsername.getText().toString();
                 String passWord = mActivityLoginBinding.edtPassword.getText().toString();
                 mLoginPresenterImp.login(userName, passWord);

@@ -6,4 +6,5 @@
     <color name="colorAccent">#F06292</color>
     <color name="background_login">#000000</color>
     <color name="text_color_second">#A6E6E3E6</color>
+    <color name="offline_status">#8C8C8C</color>
 </resources>

@@ -1,33 +1,36 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/cimvAccount"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="fitXY"
+            android:id="@+id/imvAccount"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/ic_baseline_account_circle_24" />
 
         <ImageView
-
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:id="@+id/imvStatus"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="55dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="14dp"
             android:src="@drawable/ic_baseline_brightness_online_1_24" />
 
         <TextView
             android:id="@+id/tvFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cimvAccount"
+            android:layout_below="@id/imvAccount"
             android:gravity="center"
+            android:maxLines="2"
             android:text="Duong Quang Chau"
+            android:textSize="11sp"
             android:textStyle="bold" />
     </RelativeLayout>
 </layout>

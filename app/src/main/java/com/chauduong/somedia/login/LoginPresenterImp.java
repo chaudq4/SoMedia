@@ -60,7 +60,7 @@ public class LoginPresenterImp implements LoginPresenter {
                     }
                 }
                 if (isResult == false) {
-                    mLoginView.signInError("Wrong account. Please check information!");
+                   // mLoginView.signInError("Wrong account. Please check information!");
                 }
             }
 

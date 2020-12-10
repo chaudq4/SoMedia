@@ -17,6 +17,7 @@ import com.chauduong.somedia.adapter.Util;
 import com.chauduong.somedia.databinding.ItemMessClientBinding;
 import com.chauduong.somedia.databinding.ItemMessUserBinding;
 import com.chauduong.somedia.model.Mess;
+import com.chauduong.somedia.session.SessionManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,7 @@ public class MessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @Override
     public int getItemViewType(int position) {
 
-        return messList.get(position).getmUser().getUserName().equals(Util.getmUser().getUserName()) ? 1 : 0;
+        return messList.get(position).getmUser().getUserName().equals(SessionManager.getInstance(mContext).getmUser().getUserName()) ? 1 : 0;
     }
 
     @NonNull

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.chauduong.somedia.keycode.Constant;
+import com.chauduong.somedia.model.User;
 
 public class SessionManager {
     private Context mContext;
@@ -12,6 +13,13 @@ public class SessionManager {
     private SharedPreferences.Editor mEditor;
     private static final int PRE_MODE = 1;
     private static SessionManager mInstance = null;
+    private User mUser;
+    public  User getmUser() {
+        return mUser;
+    }
+    public  void setmUser(User User) {
+        mUser = User;
+    }
 
 
     @SuppressLint("WrongConstant")

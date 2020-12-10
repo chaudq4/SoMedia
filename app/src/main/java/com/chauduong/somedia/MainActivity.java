@@ -10,6 +10,7 @@ import com.chauduong.somedia.session.SessionManager;
 import com.chauduong.somedia.ui.examination.ExaminationFragment;
 import com.chauduong.somedia.ui.home.HomeFragment;
 import com.chauduong.somedia.ui.message.MessFragment;
+import com.chauduong.somedia.ui.setting.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         setContentView(R.layout.activity_bottom);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(this);
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void initData() {
         mUser = (User) getIntent().getSerializableExtra(Constant.KEY_USER_LOGIN);
-        Util.setmUser(mUser);
+        SessionManager.getInstance(this).setmUser(mUser);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 loadFragment(fragment);
                 return true;
             case R.id.navigation_setting:
-                SessionManager.getInstance(this).setIsLogin(false);
-                finish();
+                fragment = new SettingFragment();
+                loadFragment(fragment);
                 break;
         }
         return false;

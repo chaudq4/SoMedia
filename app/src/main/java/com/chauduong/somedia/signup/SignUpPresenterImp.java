@@ -1,10 +1,13 @@
 package com.chauduong.somedia.signup;
 
+import android.util.Log;
+
 import com.chauduong.somedia.model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpPresenterImp implements SignUpPresenter {
+    private static final String TAG = "SignUpPresenterImp" ;
     private SignUpView mSignUpView;
 
     public SignUpPresenterImp(SignUpView mSignUpView) {
@@ -16,7 +19,10 @@ public class SignUpPresenterImp implements SignUpPresenter {
         if (checkValid(user)) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("user");
-            myRef.push().setValue(user);
+            String id = myRef.push().getKey();
+            Log.d(TAG, "signUp: "+ id);
+            user.setId(id);
+            myRef.child(id).setValue(user);
             mSignUpView.signUpSuccess(user);
         }
         ;

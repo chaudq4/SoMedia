@@ -43,7 +43,7 @@ public class LoginPresenterImp implements LoginPresenter {
             return;
         }
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user");
+        final DatabaseReference myRef = database.getReference("user");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -52,7 +52,10 @@ public class LoginPresenterImp implements LoginPresenter {
                     User user = dataSnapshot1.getValue(User.class);
                     if (user.getUserName().equalsIgnoreCase(username) && user.getPassWord().equals(password)) {
                         isResult = true;
+                        myRef.child(user.getId()).child("online").setValue(true);
+                        user.setOnline(true);
                         mLoginView.signInSuccess(user);
+                        myRef.removeEventListener(this);
                         break;
                     }
                 }
@@ -66,8 +69,8 @@ public class LoginPresenterImp implements LoginPresenter {
                 mLoginView.signInError("Cannot connect to server. Please check network!");
             }
         });
-    }
 
+    }
 
 
 }

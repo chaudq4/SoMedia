@@ -18,6 +18,7 @@ import com.chauduong.somedia.R;
 import com.chauduong.somedia.adapter.Util;
 import com.chauduong.somedia.databinding.FragmentNewfeedsBinding;
 import com.chauduong.somedia.model.Newfeed;
+import com.chauduong.somedia.session.SessionManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -96,7 +97,7 @@ public class NewfeedFragment extends Fragment implements View.OnClickListener, N
                 DateFormat dateFormatter = new SimpleDateFormat("kk:mm dd-MM-yyyy");
                 dateFormatter.setLenient(false);
                 Date today = new Date();
-                Newfeed newfeed = new Newfeed(Util.getmUser(),today,content,null);
+                Newfeed newfeed = new Newfeed(SessionManager.getInstance(getContext()).getmUser(),today,content,null);
                 mNewfeedPresenter.addNew(newfeed);
             }
         });

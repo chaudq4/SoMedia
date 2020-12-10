@@ -15,6 +15,7 @@ import com.chauduong.somedia.R;
 import com.chauduong.somedia.adapter.Util;
 import com.chauduong.somedia.databinding.FragmentRoomchatBinding;
 import com.chauduong.somedia.model.Mess;
+import com.chauduong.somedia.session.SessionManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,7 +82,7 @@ public class MessFragment extends Fragment implements MessView, View.OnClickList
                     Toasty.warning(getContext(), "Nhập nội dung tin nhắn").show();
                     return;
                 }
-                Mess mess = new Mess(Util.getmUser(), new Date(), content, null);
+                Mess mess = new Mess(SessionManager.getInstance(getContext()).getmUser(), new Date(), content, null);
                 mMessPresenter.addMess(mess);
                 mFragmentRoomchatBinding.edtContent.setText("");
                 break;

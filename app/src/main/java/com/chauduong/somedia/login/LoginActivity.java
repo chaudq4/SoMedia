@@ -1,6 +1,7 @@
 package com.chauduong.somedia.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -71,6 +72,11 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
             mActivityLoginBinding.edtUsername.setText(userName);
             mActivityLoginBinding.edtPassword.setText(passWord);
         }
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     @Override

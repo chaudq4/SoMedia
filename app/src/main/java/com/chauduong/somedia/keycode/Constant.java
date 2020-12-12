@@ -9,4 +9,6 @@ public class Constant {
     public static final String KEY_PASSWORD="passWord";
     public static final String KEY_USER_RESULT_SIGNUP="KEY_USER_RESULT_SIGNUP";
     public static final int REQUEST_CODE_USER=0x00;
+    public static final int REQUEST_CODE_UPDATE_INFO=0x01;
+
 }

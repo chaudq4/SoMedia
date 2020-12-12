@@ -50,7 +50,8 @@ public class LoginPresenterImp implements LoginPresenter {
                 boolean isResult = false;
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     User user = dataSnapshot1.getValue(User.class);
-                    if (user.getUserName().equalsIgnoreCase(username) && user.getPassWord().equals(password)) {
+
+                    if (user.getUserName()!=null&&user.getPassWord()!=null&&user.getUserName().equalsIgnoreCase(username) && user.getPassWord().equals(password)) {
                         isResult = true;
                         myRef.child(user.getId()).child("online").setValue(true);
                         user.setOnline(true);

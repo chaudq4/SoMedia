@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.navigation_setting:
                 fragment = new SettingFragment();
                 loadFragment(fragment);
-                break;
+                return true;
         }
         return false;
     }

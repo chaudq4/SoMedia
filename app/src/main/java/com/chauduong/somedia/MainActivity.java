@@ -1,11 +1,13 @@
 package com.chauduong.somedia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.chauduong.somedia.adapter.Util;
 import com.chauduong.somedia.keycode.Constant;
 import com.chauduong.somedia.model.User;
+import com.chauduong.somedia.service.NotificationService;
 import com.chauduong.somedia.session.SessionManager;
 import com.chauduong.somedia.ui.examination.ExaminationFragment;
 import com.chauduong.somedia.ui.home.HomeFragment;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void initData() {
         mUser = (User) getIntent().getSerializableExtra(Constant.KEY_USER_LOGIN);
         SessionManager.getInstance(this).setmUser(mUser);
+        Intent intent= new Intent(this, NotificationService.class);
+        startService(intent);
+
     }
 
     @Override

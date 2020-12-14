@@ -5,5 +5,7 @@
     <string name="title_message">Message</string>
     <string name="title_examination">Examination</string>
     <string name="title_setting">Setting</string>
+    <string name="channel_name">"notification_message"</string>
+    <string name="channel_description">"notifaction_description"</string>
 
 </resources>
